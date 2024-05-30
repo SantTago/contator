@@ -68,18 +68,26 @@
             });
         }
 
+        // Função para incrementar o número ao carregar a página
+        function incrementarNumeroAoCarregarPagina() {
+            runTransaction(numeroRef, (numeroAtual) => {
+                return (numeroAtual || 0) + 1; // Incrementa o número atual em 1
+            });
+        }
+
         // Função para incrementar o número a cada 25 segundos
         function atualizarNumeroAutomaticamente() {
             setInterval(() => {
                 runTransaction(numeroRef, (numeroAtual) => {
-                    return (numeroAtual || 1) + 1; // Defina o número inicial aqui
+                    return (numeroAtual || 0) + 1; // Incrementa o número atual em 1
                 });
-            }, 555525000);
+            }, 555525000); // Intervalo em milissegundos
         }
 
-        // Chamar a função para iniciar a contagem quando a página carrega
+        // Chamar as funções quando a página carrega
         document.addEventListener('DOMContentLoaded', () => {
             iniciarContagem();
+            incrementarNumeroAoCarregarPagina();
             atualizarNumeroAutomaticamente();
         });
     </script>
